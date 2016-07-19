@@ -13,7 +13,7 @@ var app = express();
 var con = mysql.createConnection ({
   host: 'localhost',
   user: 'root',
-  password: 'solar``7',
+  password: '',
   database: 'caloriecounter'
 });
 
