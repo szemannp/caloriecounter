@@ -3,7 +3,6 @@
 var express = require('express');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
-var serverPort = 3000;
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var jsonParser = bodyParser.json();
@@ -28,16 +27,30 @@ var endpoints = {
   withId: '/meals/:id'
 };
 
+var serverMessages = {
+  conError: 'Error connecting to database',
+  conSuccess: 'Database connection established',
+  getSuccess: 'Data recieved from DB:\n',
+  statusFail: {'status': 'not exists'},
+  statusOk: {'status': 'ok'},
+  listen: 'Server is listening port: '
+};
+
+var backendData = {
+  staticFolder: 'client',
+  serverPort: 3000
+};
+
 con.connect(function (err) {
   if (err) {
-    console.log('Error connecting to database');
+    console.log(serverMessages.conError);
     return;
   }
-  console.log('Database connection established');
+  console.log(severMessages.conSuccess);
 });
 
 app.use(bodyParser.json());
-app.use(express.static('client'));
+app.use(express.static(backendData.staticFolder));
 
 // meal related methods, later have to be contained in meals module
 
@@ -46,7 +59,7 @@ function addMeal(meal, callback) {
   var newQuery = mysql.format(serverQueries.postMeals, table);
   con.query(newQuery, function (err, result) {
     if (err) {
-      return console.log(err.toString());
+      return console.log(serverQueries.statusFail);
     }
     callback(result);
   });
@@ -59,7 +72,7 @@ app.get(endpoints.overall, function (req, res) {
     if (err) {
       console.log(err.toString());
     }
-    console.log('Data recieved from DB:\n');
+    console.log(serverMessages.getSuccess);
     console.log(result);
     res.json(result);
   });
@@ -73,7 +86,7 @@ app.post(endpoints.overall, function (req, res) {
   }
   var callback = function (result) {
     console.log(result);
-    res.json({'status': 'ok'});
+    res.json(serverMessages.statusOk);
   }
   addMeal(meal, callback);
 });
@@ -83,12 +96,12 @@ app.delete(endpoints.withId, function (req, res) {
   console.log(toDelete);
   con.query(toDelete, function(err, result) {
     if (err) {
-      console.log({'status': 'not exists'});
+      console.log(serverMessages.statusFail);
     }
-    console.log({'status': 'ok'});
-    res.json({'status': 'ok'});
+    console.log(serverMessages.statusOk);
+    res.json(serverMessages.statusOk);
   });
 });
 
-app.listen(serverPort);
-console.log('Server is listening port: ' + serverPort);
+app.listen(backendData.serverPort);
+console.log(serverMessages.listen + backendData.serverPort);
