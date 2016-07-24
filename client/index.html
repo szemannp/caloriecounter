@@ -4,15 +4,11 @@
     <title>peet's calorie counter app</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  </head>
   <body>
     <div class="jumbotron">
       <div class="container">
@@ -25,17 +21,18 @@
       <form class="form-inline">
         <div class="form-group">
           <label for="meals">meal</label>
-          <input type="text" class="form-control" id="meal-input" placeholder="eg. veggies, meat, bread, orange juice">
+          <input type="text" class="form-control" id="meal-input" placeholder="eg. veggies, meat, bread">
         </div>
         <div class="form-group">
           <label for="calorie">calories</label>
-          <input type="number" class="form-control" id="calorie-input" placeholder="eg. 120">
+          <input type="number" class="form-control" id="calorie-input" placeholder="eg. 120" min="1">
         </div>
         <div class="form-group">
           <label for="date">date</label>
           <input type="date" class="form-control" id="date-input" placeholder="2016. 02. 31.">
         </div>
-        <button type="submit" class="btn btn-default">Add meal</button>
+        <button type="button" class="btn btn-default" id="add">Add meal</button>
+        <button type="button" class="btn btn-default" id="filter">Filter by date</button>
       </form>
     </div>
     <br>
@@ -44,8 +41,8 @@
     </div>
     <br>
     <div class="container">
-      <table class="table table-condensed table-hover">
-        <thead>
+      <table class="table table-condensed table-hover table-bordered">
+        <thead class="thead-inverse">
           <tr>
             <th>meal</th>
             <th>calories</th>
@@ -53,23 +50,13 @@
           </tr>
         </thead>
         <tbody class="db-container">
-          <tr>
-            <td>eggs</td>
-            <td>200</td>
-            <td>2016. 07. 20.</td>
-          </tr>
-          <tr>
-            <td>peaches</td>
-            <td>120</td>
-            <td>2016. 07. 20.</td>
-          </tr>
-          <tr>
-            <td>brownies</td>
-            <td>400</td>
-            <td>2016. 07. 20.</td>
-          </tr>
         </tbody>
       </table>
     </div>
+    <br>
+    <div class="container">
+      <h3>Total calories consumed: <span id="total" class="label label-primary"></span> kcal</h3>
+    </div>
+    <script src="frontend.js" type="text/javascript"></script>
   </body>
 </html>
