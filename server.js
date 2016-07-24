@@ -10,7 +10,7 @@ var app = express();
 var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: 'solar``7',
   database: 'caloriecounter'
 });
 
@@ -31,18 +31,7 @@ var backendData = {
 };
 
 var serverMessages = {
-  conError: 'Error connecting to database',
-  conSuccess: 'Database connection established',
-  getSuccess: 'Data recieved from DB:\n',
-  statusFail: {'status': 'not exists'},
-  statusOk: {'status': 'ok'},
   listen: 'Server is listening port: '
-};
-
-var serverQueries = {
-  getMeal: 'SELECT * FROM meals',
-  postMeal: 'INSERT INTO meals (name, calorie, date) VALUES (?, ?, ?)',
-  deleteMeals: 'DELETE FROM meals WHERE id=?'
 };
 
 // end of server setup

@@ -5,10 +5,8 @@ var meal = (function(con) {
   var serverMessages = {
     conError: 'Error connecting to database',
     conSuccess: 'Database connection established',
-    getSuccess: 'Data recieved from DB:\n',
     statusFail: {'status': 'not exists'},
-    statusOk: {'status': 'ok'},
-    listen: 'Server is listening port: '
+    statusOk: {'status': 'ok'}
   };
 
   var serverQueries = {
